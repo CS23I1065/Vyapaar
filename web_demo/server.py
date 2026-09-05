@@ -91,7 +91,13 @@ def transcribe_image_with_gemini(image_bytes: bytes, mime_type: str = "image/jpe
     part = genai_types.Part.from_bytes(data=image_bytes, mime_type=mime_type)
     response = client.models.generate_content(
         model=MODEL,
-        contents=["Extract all product items, quantities, and instructions from this handwritten paper list into a clean text prompt:", part],
+        contents=[
+            "Extract all product items from this handwritten shopping list. "
+            "Output ONLY a comma-separated list of item names with quantities, nothing else. "
+            "No preamble, no bullets, no markdown, no explanations. "
+            "Example output format: toor dal 1kg, urad dal 1kg, rice 2kg, wheat 1kg",
+            part,
+        ],
     )
     text = (response.text or "").strip()
     console.print(f"[dim]   ↳ Transcribed Text: {text!r}[/dim]")
@@ -258,12 +264,15 @@ class WebDemoRequestHandler(SimpleHTTPRequestHandler):
                 raw_text_for_items = payload.get("transcribed_text") or request_text
                 
                 # Extract candidate requested phrases (split by newlines, commas, bullets)
+                # Gemini is prompted to return a plain comma-separated list, so this is
+                # straightforward parsing with no preamble stripping needed.
                 raw_lines = [l.strip(" *-\t•").strip() for l in raw_text_for_items.splitlines() if l.strip()]
                 candidate_phrases = []
                 for r_line in raw_lines:
-                    # Strip leading intent verbs
+                    # Strip leading intent verbs (for manual typed requests)
                     r_lower = r_line.lower()
-                    for prefix in ("here is the list from the image:", "buy me ", "buy ", "order ", "get me ", "get ", "i want ", "i need ", "please ", "bring me "):
+                    for prefix in ("buy me ", "buy ", "order ", "get me ", "get ",
+                                   "i want ", "i need ", "please ", "bring me "):
                         if r_lower.startswith(prefix):
                             r_line = r_line[len(prefix):].strip()
                             r_lower = r_line.lower()
@@ -275,13 +284,11 @@ class WebDemoRequestHandler(SimpleHTTPRequestHandler):
                             r_line = r_line[:idx].strip()
                             r_lower = r_line.lower()
 
-                    # Split by commas or lines
+                    # Split by commas
                     for sub in r_line.split(","):
-                        sub_clean = sub.strip()
+                        sub_clean = sub.strip().replace("*", "").strip()
                         if ":" in sub_clean:
                             sub_clean = sub_clean.split(":")[0].replace("*", "").strip()
-                        else:
-                            sub_clean = sub_clean.replace("*", "").strip()
                         if sub_clean and len(sub_clean) > 1:
                             candidate_phrases.append(sub_clean)
 

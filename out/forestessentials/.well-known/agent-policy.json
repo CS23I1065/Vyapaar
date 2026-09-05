@@ -1,0 +1,17 @@
+{
+  "payload": {
+    "merchant_id": "forestessentials",
+    "max_order_value_paise": 1000000,
+    "substitution_tolerance_pct": 10.0,
+    "max_quantity_per_sku": 5,
+    "restricted_categories": [],
+    "escalation_threshold_paise": 1000000
+  },
+  "signatures": [
+    {
+      "kid": "XKOFCbIjfXk_3Q0bNG7JX76cASPG-t4pds1eiSz6KP8",
+      "alg": "EdDSA",
+      "sig": "2crjNlgjWWVBUcjYq30plik8CS2Be2En0ev9XgK18zjj5no0i8vF_VLs-NHfzP5-LYZXwPD4i9rM-ZTA0jArBw"
+    }
+  ]
+}

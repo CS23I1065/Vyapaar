@@ -1,0 +1,66 @@
+{
+  "payload": {
+    "version": "1.0",
+    "merchant_id": "forestessentials",
+    "generated_at": "2026-09-05T14:53:30.138270+00:00",
+    "items": [
+      {
+        "sku": "21324",
+        "title": "Keshanta Advanced Hair Growth Serum",
+        "description": "",
+        "category": "uncategorized",
+        "price_paise": 315000,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": "https://cdn.forestessentialsindia.com/pub/media/catalog/product/2/1/21324_kesanta_advanced_hair_growth_serum_50ml_front.png",
+        "attributes": {
+          "brand": "Forest Essentials"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.forestessentialsindia.com/kehsanta-advanced-hair-growth-serum.html",
+            "extraction_method": "microdata",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T14:53:30.138270Z",
+            "confidence": null
+          },
+          "description": {
+            "source_url": "https://www.forestessentialsindia.com/kehsanta-advanced-hair-growth-serum.html",
+            "extraction_method": "microdata",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T14:53:30.138270Z",
+            "confidence": null
+          },
+          "category": {
+            "source_url": "https://www.forestessentialsindia.com/kehsanta-advanced-hair-growth-serum.html",
+            "extraction_method": "microdata",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T14:53:30.138270Z",
+            "confidence": null
+          },
+          "price_paise": {
+            "source_url": "https://www.forestessentialsindia.com/kehsanta-advanced-hair-growth-serum.html",
+            "extraction_method": "microdata",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T14:53:30.138270Z",
+            "confidence": null
+          },
+          "in_stock": {
+            "source_url": "https://www.forestessentialsindia.com/kehsanta-advanced-hair-growth-serum.html",
+            "extraction_method": "microdata",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T14:53:30.138270Z",
+            "confidence": null
+          }
+        }
+      }
+    ]
+  },
+  "signatures": [
+    {
+      "kid": "XKOFCbIjfXk_3Q0bNG7JX76cASPG-t4pds1eiSz6KP8",
+      "alg": "EdDSA",
+      "sig": "1fgzIX5--5MZERH4prBVXfgj1DbIKq5ZegcdnTpyyQkF4YKZeC90XlISi1kKPGj5Zz_XEZbNxYnzCTzC-dn9Dw"
+    }
+  ]
+}
