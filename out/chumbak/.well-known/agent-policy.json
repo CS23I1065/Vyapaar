@@ -1,0 +1,17 @@
+{
+  "payload": {
+    "merchant_id": "chumbak",
+    "max_order_value_paise": 1000000,
+    "substitution_tolerance_pct": 10.0,
+    "max_quantity_per_sku": 5,
+    "restricted_categories": [],
+    "escalation_threshold_paise": 1000000
+  },
+  "signatures": [
+    {
+      "kid": "GzVBOtnvIOoeuvV1JSg8z_602BSGYUL8-CY5ypyiAWU",
+      "alg": "EdDSA",
+      "sig": "NddZ4AAXiKoBcYA1CA6Rs86i30MoAO2iLLux3YJDPKnHb0uD1eIlg6pkZ432dofSxizxzyQkRvl4Fz2bzZ0rDA"
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+{
+  "payload": {
+    "version": "1.0",
+    "merchant_id": "bigbasket",
+    "generated_at": "2026-09-05T09:10:32.425249+00:00",
+    "items": [
+      {
+        "sku": "url-derived-7002ffda3bab",
+        "title": "Del Monte Four Seasons Mixed Fruit Drink, 240 ml Tin",
+        "description": "Del Monte Drink Four Seasons Mixed Fruit 100 240 Ml Tin",
+        "category": "fruit juices & drinks",
+        "price_paise": 3500,
+        "currency": "INR",
+        "in_stock": false,
+        "image_url": null,
+        "attributes": {
+          "brand": "Del Monte"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/265885/del-monte-four-seasons-mixed-fruit-drink-100-240-ml-tin/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/265885/del-monte-four-seasons-mixed-fruit-drink-100-240-ml-tin/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/265885/del-monte-four-seasons-mixed-fruit-drink-100-240-ml-tin/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/265885/del-monte-four-seasons-mixed-fruit-drink-100-240-ml-tin/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/265885/del-monte-four-seasons-mixed-fruit-drink-100-240-ml-tin/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          }
+        }
+      },
+      {
+        "sku": "url-derived-438aba3503f3",
+        "title": "Real Fruit Power Pomegranate Juice, 1 L",
+        "description": "Real Fruit Power Pomegranate Juice, 1 L",
+        "category": "fruit juices & drinks",
+        "price_paise": 11500,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": null,
+        "attributes": {
+          "brand": "Real"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/265853/real-fruit-power-juice-pomegranate-1-l/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/265853/real-fruit-power-juice-pomegranate-1-l/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/265853/real-fruit-power-juice-pomegranate-1-l/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/265853/real-fruit-power-juice-pomegranate-1-l/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/265853/real-fruit-power-juice-pomegranate-1-l/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          }
+        }
+      },
+      {
+        "sku": "url-derived-773d44cb1898",
+        "title": "Bingo! Original Style Chilli Sprinkled Potato Chips, 85 g",
+        "description": "Bingo! Original Style Chilli Sprinkled Potato Chips, 85 g",
+        "category": "snacks & branded foods / snacks & namkeen / chips & corn snacks",
+        "price_paise": 3350,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": null,
+        "attributes": {
+          "brand": "Bingo!"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/40219148/bingo-original-style-potato-chips-chilli-sprinkled-100-g/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/40219148/bingo-original-style-potato-chips-chilli-sprinkled-100-g/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/40219148/bingo-original-style-potato-chips-chilli-sprinkled-100-g/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/40219148/bingo-original-style-potato-chips-chilli-sprinkled-100-g/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/40219148/bingo-original-style-potato-chips-chilli-sprinkled-100-g/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          }
+        }
+      },
+      {
+        "sku": "url-derived-18ebc03d4ce0",
+        "title": "bb Royal Toor Dal/Togari Bele - Desi, 1 kg Pouch",
+        "description": "BB Royal Toor dal is a nutritious and tasty pulse, rich in fiber, protein, and carbohydrates, cultivated using traditional methods without chemicals.",
+        "category": "foodgrains, oil & masala / dals & pulses / toor, channa & moong dal",
+        "price_paise": 16500,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": null,
+        "attributes": {
+          "brand": "bb Royal"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/10000425/bb-royal-toor-dalarhar-dal-desi-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/10000425/bb-royal-toor-dalarhar-dal-desi-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/10000425/bb-royal-toor-dalarhar-dal-desi-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/10000425/bb-royal-toor-dalarhar-dal-desi-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/10000425/bb-royal-toor-dalarhar-dal-desi-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 0.95
+          }
+        }
+      },
+      {
+        "sku": "url-derived-584dfb3972d9",
+        "title": "bb Popular Urad Dal/Uddina Bele - Split, 1 kg Pouch",
+        "description": "bb Popular Urad Dal/Uddina Bele - Split, 1 kg Pouch",
+        "category": "dals & pulses",
+        "price_paise": 16900,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": null,
+        "attributes": {
+          "brand": "bb Popular"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/30010377/bb-popular-urad-dal-split-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/30010377/bb-popular-urad-dal-split-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/30010377/bb-popular-urad-dal-split-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/30010377/bb-popular-urad-dal-split-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/30010377/bb-popular-urad-dal-split-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          }
+        }
+      },
+      {
+        "sku": "url-derived-f4913a23177b",
+        "title": "Daawat Rozana Super Basmati Rice, 5 kg",
+        "description": "Daawat Rozana Super Basmati Rice, 5 kg",
+        "category": "rice & rice products",
+        "price_paise": 37500,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": null,
+        "attributes": {
+          "brand": "Daawat"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/40075197/daawat-basmati-rice-rozana-super-90-5-kg/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/40075197/daawat-basmati-rice-rozana-super-90-5-kg/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/40075197/daawat-basmati-rice-rozana-super-90-5-kg/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/40075197/daawat-basmati-rice-rozana-super-90-5-kg/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/40075197/daawat-basmati-rice-rozana-super-90-5-kg/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          }
+        }
+      },
+      {
+        "sku": "url-derived-8bbae085740c",
+        "title": "Aashirvaad Atta/Godihittu - Whole Wheat, 1 kg",
+        "description": "Aashirvaad Atta Whole Wheat 1 Kg Pouch",
+        "category": "atta, flours & sooji",
+        "price_paise": 6500,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": null,
+        "attributes": {
+          "brand": "Aashirvaad"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.bigbasket.com/pd/30006887/aashirvaad-atta-whole-wheat-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "description": {
+            "source_url": "https://www.bigbasket.com/pd/30006887/aashirvaad-atta-whole-wheat-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "category": {
+            "source_url": "https://www.bigbasket.com/pd/30006887/aashirvaad-atta-whole-wheat-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "price_paise": {
+            "source_url": "https://www.bigbasket.com/pd/30006887/aashirvaad-atta-whole-wheat-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          },
+          "in_stock": {
+            "source_url": "https://www.bigbasket.com/pd/30006887/aashirvaad-atta-whole-wheat-1-kg-pouch/",
+            "extraction_method": "llm_inferred",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T09:10:32.425249Z",
+            "confidence": 1.0
+          }
+        }
+      }
+    ]
+  },
+  "signatures": [
+    {
+      "kid": "ozvWgbiHiiwnD_S75o9QeQcaLMg96U2A2m-vXfj1xMc",
+      "alg": "EdDSA",
+      "sig": "DlW5v2wuliLhmQmwhSwb8v0YTTDbR-osmTUTWZ6T-T5U9NPfET6vJBNBoIK6HDXgh2reZaqoD2BRSD57PZgzAQ"
+    }
+  ]
+}

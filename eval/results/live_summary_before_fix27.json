@@ -1,0 +1,35 @@
+{
+  "fidelity_metrics": {
+    "n_calls": 240,
+    "n_scenarios": 30,
+    "signable_rate": 1.0,
+    "category_accuracy": 0.06666666666666667,
+    "budget_accuracy": 1.0,
+    "attributes_accuracy": 0.9666666666666667,
+    "fully_correct_rate": 0.06666666666666667,
+    "pass_at_k": 0.06666666666666667
+  },
+  "ambiguity_metrics": {
+    "n_calls": 64,
+    "n_scored": 64,
+    "accuracy": 0.75
+  },
+  "e2e_scenarios_covered": 30,
+  "e2e_scenarios_total": 30,
+  "e2e_metrics_summary": [
+    {"config_id": "C1", "n_instances": 120, "benign_utility": 0.2222222222222222, "utility_under_attack": 0.7444444444444445, "false_approval_rate": 0.25925925925925924},
+    {"config_id": "C2_C3", "n_instances": 120, "benign_utility": 0.2962962962962963, "utility_under_attack": 1.0, "false_approval_rate": 0.0},
+    {"config_id": "C4", "n_instances": 120, "benign_utility": 0.2962962962962963, "utility_under_attack": 1.0, "false_approval_rate": 0.0}
+  ],
+  "budget_summary": {
+    "ceiling_usd": 5.0,
+    "spent_usd": 0.0582,
+    "remaining_usd": 4.9418,
+    "call_count": 304,
+    "aborted": false,
+    "abort_reason": null
+  },
+  "model": "gemini-3.1-flash-lite",
+  "k": 8,
+  "generated_at": "2026-08-29T07:25:16.811699+00:00"
+}

@@ -1,0 +1,116 @@
+{
+  "payload": {
+    "version": "1.0",
+    "merchant_id": "chumbak",
+    "generated_at": "2026-09-05T06:46:04.253044+00:00",
+    "items": [
+      {
+        "sku": "8907605117336",
+        "title": "TEAL by Chumbak Forest Jade Watch, Metal link Strap",
+        "description": "An original Chumbak design, our TEAL by Chumbak Forest Jade Watch wristwatch features a classic dial with gold indices and pairs well with every look. Crafted from a metal link strap and powered by a quartz mechanism - this watch is perfect for every occasion. Our watches come in joyful  packaging, perfect for gifting.",
+        "category": "Watches",
+        "price_paise": 153700,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": "https://www.chumbak.com/cdn/shop/files/1_dda0162f-d7be-43d9-94de-4d565a7e8245.jpg?v=1781510787&width=1024",
+        "attributes": {
+          "brand": "chumbakdesign"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.chumbak.com/products/teal-by-chumbak-forest-jade-watch-metal-link-strap",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "description": {
+            "source_url": "https://www.chumbak.com/products/teal-by-chumbak-forest-jade-watch-metal-link-strap",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "category": {
+            "source_url": "https://www.chumbak.com/products/teal-by-chumbak-forest-jade-watch-metal-link-strap",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "price_paise": {
+            "source_url": "https://www.chumbak.com/products/teal-by-chumbak-forest-jade-watch-metal-link-strap",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "in_stock": {
+            "source_url": "https://www.chumbak.com/products/teal-by-chumbak-forest-jade-watch-metal-link-strap",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          }
+        }
+      },
+      {
+        "sku": "8907605098703",
+        "title": "Fantastical Elephant Printed Wrist Watch With Bracelet Set",
+        "description": "It's time to level up from old watches with the Fantastical Elephant Printed Wrist Watch With Bracelet Set. Made from PU strap with Citizen 2035 movement, this watch comes with a bracelet made of metal.",
+        "category": "Watches",
+        "price_paise": 181225,
+        "currency": "INR",
+        "in_stock": true,
+        "image_url": "https://www.chumbak.com/cdn/shop/files/1_c5925ce5-8fe2-4b98-8795-819645710c0c.jpg?v=1785338910&width=1024",
+        "attributes": {
+          "brand": "chumbakdesign"
+        },
+        "field_provenance": {
+          "title": {
+            "source_url": "https://www.chumbak.com/products/fantastical-elephant-printed-strap-watch-and-bracelet-set",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "description": {
+            "source_url": "https://www.chumbak.com/products/fantastical-elephant-printed-strap-watch-and-bracelet-set",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "category": {
+            "source_url": "https://www.chumbak.com/products/fantastical-elephant-printed-strap-watch-and-bracelet-set",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "price_paise": {
+            "source_url": "https://www.chumbak.com/products/fantastical-elephant-printed-strap-watch-and-bracelet-set",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          },
+          "in_stock": {
+            "source_url": "https://www.chumbak.com/products/fantastical-elephant-printed-strap-watch-and-bracelet-set",
+            "extraction_method": "schema_org",
+            "signature_verified": false,
+            "extracted_at": "2026-09-05T06:46:04.253044Z",
+            "confidence": null
+          }
+        }
+      }
+    ]
+  },
+  "signatures": [
+    {
+      "kid": "GzVBOtnvIOoeuvV1JSg8z_602BSGYUL8-CY5ypyiAWU",
+      "alg": "EdDSA",
+      "sig": "v1N-JtSlcCEvljjPi2-EIV2HfUPJqQoYJEYJhO2T203-hXYLDvGFFB3Gj-guADGCMMSK0IIiFDNfdsrIzqs7CA"
+    }
+  ]
+}

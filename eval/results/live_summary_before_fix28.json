@@ -1,0 +1,53 @@
+{
+  "fidelity_metrics": {
+    "n_calls": 240,
+    "n_scenarios": 30,
+    "signable_rate": 0.9666666666666667,
+    "category_accuracy": 0.9666666666666667,
+    "budget_accuracy": 0.9666666666666667,
+    "attributes_accuracy": 0.9333333333333333,
+    "fully_correct_rate": 0.9333333333333333,
+    "pass_at_k": 0.9333333333333333
+  },
+  "ambiguity_metrics": {
+    "n_calls": 64,
+    "n_scored": 64,
+    "accuracy": 0.75
+  },
+  "e2e_scenarios_covered": 29,
+  "e2e_scenarios_total": 30,
+  "e2e_metrics_summary": [
+    {
+      "config_id": "C1",
+      "n_instances": 116,
+      "benign_utility": 0.23076923076923078,
+      "utility_under_attack": 0.7701149425287356,
+      "false_approval_rate": 0.23076923076923078
+    },
+    {
+      "config_id": "C2_C3",
+      "n_instances": 116,
+      "benign_utility": 0.3076923076923077,
+      "utility_under_attack": 1.0,
+      "false_approval_rate": 0.0
+    },
+    {
+      "config_id": "C4",
+      "n_instances": 116,
+      "benign_utility": 0.3076923076923077,
+      "utility_under_attack": 1.0,
+      "false_approval_rate": 0.0
+    }
+  ],
+  "budget_summary": {
+    "ceiling_usd": 5.0,
+    "spent_usd": 0.0677,
+    "remaining_usd": 4.9323,
+    "call_count": 304,
+    "aborted": false,
+    "abort_reason": null
+  },
+  "model": "gemini-3.1-flash-lite",
+  "k": 8,
+  "generated_at": "2026-08-29T08:54:23.922943+00:00"
+}

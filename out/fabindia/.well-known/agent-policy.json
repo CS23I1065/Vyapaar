@@ -1,0 +1,17 @@
+{
+  "payload": {
+    "merchant_id": "fabindia",
+    "max_order_value_paise": 1000000,
+    "substitution_tolerance_pct": 10.0,
+    "max_quantity_per_sku": 5,
+    "restricted_categories": [],
+    "escalation_threshold_paise": 1000000
+  },
+  "signatures": [
+    {
+      "kid": "go3KF8e_bfSUqced4OZdCYo6UZ5hMywCQNOjLd5ptwA",
+      "alg": "EdDSA",
+      "sig": "wDQ73SglGwePEFcms_r7XBd2M_AM6vcuADwFTpmwNJwY-rIbiFci3HMZ-6rrGauKygVOfpTrzOuLN9ErJiCDCg"
+    }
+  ]
+}

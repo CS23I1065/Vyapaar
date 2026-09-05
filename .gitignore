@@ -1,0 +1,39 @@
+# ---- SECRETS: never commit. This repo is published publicly. ----
+.env
+.env.local
+*.csv
+rzp-test-key.csv
+keys/
+*.pem
+*_private.jwk
+secrets/
+
+# ---- Generated artifacts ----
+audit/logs/
+eval/transcripts/
+eval/out/
+merchant_kit/snapshots/
+razorpay_client/cassettes/recorded/
+demo/recordings/
+demo/interactive_out/
+*.jsonl
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
+.venv/
+venv/
+
+# ---- OS / editor ----
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+commands.txt

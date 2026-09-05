@@ -1,0 +1,54 @@
+{
+  "fidelity_metrics": {
+    "n_calls": 240,
+    "n_scenarios": 30,
+    "signable_rate": 0.9333333333333333,
+    "category_accuracy": 0.9333333333333333,
+    "budget_accuracy": 0.9333333333333333,
+    "attributes_accuracy": 0.9333333333333333,
+    "fully_correct_rate": 0.9333333333333333,
+    "pass_at_k": 0.9333333333333333
+  },
+  "ambiguity_metrics": {
+    "n_calls": 64,
+    "n_scored": 64,
+    "accuracy": 0.75
+  },
+  "e2e_scenarios_covered": 22,
+  "e2e_scenarios_total": 30,
+  "e2e_metrics_summary": [
+    {
+      "config_id": "C1",
+      "n_instances": 88,
+      "benign_utility": 0.55,
+      "utility_under_attack": 0.09090909090909091,
+      "false_approval_rate": 0.45
+    },
+    {
+      "config_id": "C2_C3",
+      "n_instances": 88,
+      "benign_utility": 0.95,
+      "utility_under_attack": 1.0,
+      "false_approval_rate": 0.0
+    },
+    {
+      "config_id": "C4",
+      "n_instances": 88,
+      "benign_utility": 0.95,
+      "utility_under_attack": 1.0,
+      "false_approval_rate": 0.0
+    }
+  ],
+  "budget_summary": {
+    "ceiling_usd": 5.0,
+    "spent_usd": 0.0628,
+    "remaining_usd": 4.9372,
+    "call_count": 304,
+    "aborted": false,
+    "abort_reason": null
+  },
+  "model": "gemini-3.1-flash-lite",
+  "k": 8,
+  "generated_at": "2026-08-29T13:07:21.967144+00:00",
+  "e2e_replay_note": "e2e_metrics_summary reflects eval/live_llm_eval.py::apply_simulated_review() (FIXES.md #30), applied via a zero-cost offline replay of this same run's saved live_fidelity.jsonl -- not a fresh live call (the day's API quota was spent on this run itself). fidelity_metrics/ambiguity_metrics above are the original, unmodified live numbers."
+}

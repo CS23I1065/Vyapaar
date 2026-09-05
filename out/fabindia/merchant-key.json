@@ -1,0 +1,10 @@
+{
+  "kid": "go3KF8e_bfSUqced4OZdCYo6UZ5hMywCQNOjLd5ptwA",
+  "private_key_b64url": "VRsAEXEH4Bya2KcrOTbpHakmh1Q7z7SCNaMjJ2RZHoE",
+  "public_jwk": {
+    "kty": "OKP",
+    "crv": "Ed25519",
+    "x": "cOx8zDKhUYalsWCM5cO3qInl-KY75zbdvQol5Olw1Ig",
+    "kid": "go3KF8e_bfSUqced4OZdCYo6UZ5hMywCQNOjLd5ptwA"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "payload": {
+    "merchant_id": "bigbasket",
+    "max_order_value_paise": 1000000,
+    "substitution_tolerance_pct": 10.0,
+    "max_quantity_per_sku": 5,
+    "restricted_categories": [],
+    "escalation_threshold_paise": 1000000
+  },
+  "signatures": [
+    {
+      "kid": "ozvWgbiHiiwnD_S75o9QeQcaLMg96U2A2m-vXfj1xMc",
+      "alg": "EdDSA",
+      "sig": "5H3R1Httyc3tq7xgNgAT0nnG6pZlSGK-RGah7vxnBZ9M5nVbdD8anBEo3qTXa5fzE-8RB-yIsnfUXyn17yxOAA"
+    }
+  ]
+}

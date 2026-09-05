@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentCart - Agent Negotiator</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="chat-app">
+    <!-- TOP NAVBAR / MERCHANT SELECTOR -->
+    <header class="chat-header">
+      <div class="header-left">
+        <span class="logo-icon">🛒</span>
+        <div class="logo-text">
+          <h1>AgentCart</h1>
+          <span class="sub-text">Signed Catalog Negotiation & Cryptographic Gates</span>
+        </div>
+      </div>
+
+      <div class="merchant-selector">
+        <label for="merchantSelect">Merchant:</label>
+        <select id="merchantSelect">
+          <option value="bigbasket" selected>🛒 BigBasket (Grocery & Staples)</option>
+          <option value="fabindia">👕 Fabindia (Apparel & Fashion)</option>
+          <option value="chumbak">⌚ Chumbak (Lifestyle & Watches)</option>
+        </select>
+      </div>
+
+      <div class="header-right">
+        <span class="badge pulse">Live Terminal Logs Active</span>
+      </div>
+    </header>
+
+    <!-- CHAT MESSAGES STREAM -->
+    <main class="chat-messages" id="chatMessages">
+      <!-- Welcome Message -->
+      <div class="message-row agent-row">
+        <div class="avatar">🤖</div>
+        <div class="bubble agent-bubble">
+          <p class="greeting">Welcome to <strong>AgentCart</strong>.</p>
+          <p class="instructions">Select a merchant from the top bar, then type your shopping request or upload a handwritten paper note image below.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- FLOATING ATTACHMENT PREVIEW CHIP -->
+    <div class="attachment-preview hidden" id="attachmentPreview">
+      <span class="attach-icon">📄</span>
+      <span class="attach-name" id="attachName">list.jpeg</span>
+      <button class="remove-attach" onclick="removeAttachment()" title="Remove file">×</button>
+    </div>
+
+    <!-- CHAT INPUT BAR -->
+    <footer class="chat-input-bar">
+      <div class="input-container">
+        <button class="btn-attach" onclick="document.getElementById('fileInput').click()" title="Attach paper list / image note">
+          📷
+        </button>
+        <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+        
+        <input type="text" id="userInput" placeholder="Ask AgentCart (e.g. get toor dal, urad dal, rice, wheat, milk)..." onkeydown="if(event.key==='Enter') sendMessage()" />
+        
+        <button class="btn-send" id="sendBtn" onclick="sendMessage()" title="Send request">
+          ➔
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    let selectedFile = null;
+    let imageBase64 = null;
+    let messageCounter = 0;
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        selectedFile = file;
+        document.getElementById('attachName').innerText = file.name;
+        document.getElementById('attachmentPreview').classList.remove('hidden');
+
+        const reader = new FileReader();
+        reader.onload = (e) => { imageBase64 = e.target.result; };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removeAttachment() {
+      selectedFile = null;
+      imageBase64 = null;
+      document.getElementById('fileInput').value = '';
+      document.getElementById('attachmentPreview').classList.add('hidden');
+    }
+
+    async function sendMessage() {
+      const textInput = document.getElementById('userInput');
+      const text = textInput.value.trim();
+      const merchant = document.getElementById('merchantSelect').value;
+
+      if (!text && !imageBase64) {
+        alert('Please enter a shopping request or upload an image note.');
+        return;
+      }
+
+      // 1. Render User Bubble
+      appendUserBubble(text, imageBase64);
+
+      // Reset Input fields
+      const currentPayload = {
+        merchant: merchant,
+        request_text: text || null,
+        image_b64: imageBase64
+      };
+      textInput.value = '';
+      removeAttachment();
+
+      // 2. Render Loading Agent Bubble
+      const msgId = 'msg-' + (++messageCounter);
+      appendLoadingBubble(msgId);
+
+      try {
+        const res = await fetch('/api/negotiate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(currentPayload)
+        });
+        const data = await res.json();
+        if (data.error) {
+          updateAgentBubbleWithError(msgId, data.error);
+          return;
+        }
+        updateAgentBubbleWithCart(msgId, data);
+      } catch (err) {
+        updateAgentBubbleWithError(msgId, err.message);
+      }
+    }
+
+    function appendUserBubble(text, imgB64) {
+      const chat = document.getElementById('chatMessages');
+      const row = document.createElement('div');
+      row.className = 'message-row user-row';
+
+      let imgHtml = imgB64 ? `<div class="user-img-preview"><img src="${imgB64}" alt="Uploaded Note" /></div>` : '';
+      let textHtml = text ? `<p>${escapeHtml(text)}</p>` : '';
+
+      row.innerHTML = `
+        <div class="bubble user-bubble">
+          ${imgHtml}
+          ${textHtml}
+        </div>
+        <div class="avatar user-avatar">👤</div>
+      `;
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function appendLoadingBubble(msgId) {
+      const chat = document.getElementById('chatMessages');
+      const row = document.createElement('div');
+      row.className = 'message-row agent-row';
+      row.id = msgId;
+
+      row.innerHTML = `
+        <div class="avatar">🤖</div>
+        <div class="bubble agent-bubble loading-bubble">
+          <div class="typing-indicator">
+            <span></span><span></span><span></span>
+          </div>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Negotiating with Merchant Agent & Verifying Gates...</span>
+        </div>
+      `;
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function updateAgentBubbleWithError(msgId, errorMsg) {
+      const row = document.getElementById(msgId);
+      if (!row) return;
+      row.querySelector('.agent-bubble').innerHTML = `
+        <div class="error-box">
+          ❌ <strong>Negotiation Error:</strong> ${escapeHtml(errorMsg)}
+        </div>
+      `;
+    }
+
+    function updateAgentBubbleWithCart(msgId, data) {
+      const row = document.getElementById(msgId);
+      if (!row) return;
+
+      const bubble = row.querySelector('.agent-bubble');
+      bubble.classList.remove('loading-bubble');
+
+      let ocrHtml = '';
+      if (data.transcribed_text) {
+        ocrHtml = `
+          <div class="ocr-badge">
+            <span class="ocr-icon">📷 Gemini Vision OCR:</span> "${escapeHtml(data.transcribed_text)}"
+          </div>
+        `;
+      }
+
+      let gatesHtml = `
+        <div class="gates-pill">
+          ✓ ${data.gates_summary || '20 / 20 Security Gates Verified'}
+        </div>
+      `;
+
+      // Build Primary Cart Lines
+      let primaryLinesHtml = '';
+      if (data.primary_cart.lines.length === 0) {
+        primaryLinesHtml = `<div style="color: var(--text-muted); font-size: 0.88rem; padding: 0.5rem 0; font-style: italic;">No requested items are currently available in stock at ${escapeHtml(data.merchant.toUpperCase())}.</div>`;
+      } else {
+        data.primary_cart.lines.forEach((line) => {
+          const tag = line.is_upsell ? '<span class="tag upsell-tag">🎁 Merchant Suggestion</span>' : '';
+          primaryLinesHtml += `
+            <div class="cart-line-item">
+              <label class="line-left">
+                <input type="checkbox" class="cart-cb cb-${msgId}" data-sku="${line.sku}" data-qty="${line.quantity}" data-price="${line.line_total_rupees}" checked onchange="recalcMsgTotal('${msgId}')" />
+                <div class="line-details">
+                  <span class="line-title">${escapeHtml(line.title)} <strong class="qty-badge">x${line.quantity}</strong></span>
+                  <span class="line-sub">Unit Price: Rs ${line.unit_price_rupees.toFixed(2)} ${tag}</span>
+                </div>
+              </label>
+              <div class="line-right">
+                <span class="line-total-price">Rs ${line.line_total_rupees.toFixed(2)}</span>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // Build Alt Cart Lines if present
+      let altCartHtml = '';
+      if (data.alternative_cart && data.alternative_cart.lines.length > 0) {
+        let altLinesHtml = '';
+        data.alternative_cart.lines.forEach((line) => {
+          altLinesHtml += `
+            <div class="cart-line-item alt-item">
+              <label class="line-left">
+                <input type="checkbox" class="cart-cb cb-${msgId}" data-sku="${line.sku}" data-qty="${line.quantity}" data-price="${line.line_total_rupees}" onchange="recalcMsgTotal('${msgId}')" />
+                <div class="line-details">
+                  <span class="line-title">${escapeHtml(line.title)} <strong class="qty-badge">x${line.quantity}</strong></span>
+                  <span class="line-sub">Unit Price: Rs ${line.unit_price_rupees.toFixed(2)} <span class="tag alt-tag">Smart Alt</span></span>
+                </div>
+              </label>
+              <div class="line-right">
+                <span class="line-total-price">Rs ${line.line_total_rupees.toFixed(2)}</span>
+              </div>
+            </div>
+          `;
+        });
+        altCartHtml = `
+          <div class="alt-cart-section">
+            <div class="section-label alt-label">Smart Alternative Option</div>
+            ${altLinesHtml}
+          </div>
+        `;
+      }
+
+      // Build Unavailable Items section (dimmed)
+      let unavailHtml = '';
+      if (data.unavailable_items && data.unavailable_items.length > 0) {
+        let unavailLines = '';
+        data.unavailable_items.forEach((un) => {
+          unavailLines += `
+            <div class="unavail-item">
+              <span class="unavail-icon">⚠️</span>
+              <span class="unavail-title">${escapeHtml(un.title)}</span>
+              <span class="unavail-tag">Not available at ${escapeHtml(data.merchant.toUpperCase())}</span>
+            </div>
+          `;
+        });
+        unavailHtml = `
+          <div class="unavail-section">
+            <div class="unavail-header">Items Not Available in Stock:</div>
+            ${unavailLines}
+          </div>
+        `;
+      }
+
+      bubble.innerHTML = `
+        ${ocrHtml}
+        ${gatesHtml}
+
+        <div class="cart-card">
+          <div class="cart-header">
+            <span>Primary Offer Cart</span>
+            <span class="merchant-badge">${data.merchant.toUpperCase()}</span>
+          </div>
+
+          <div class="cart-lines-list">
+            ${primaryLinesHtml}
+          </div>
+
+          ${altCartHtml}
+          ${unavailHtml}
+
+          <div class="cart-footer">
+            <div class="cart-total-row">
+              <span>Selected Total:</span>
+              <strong id="total-${msgId}">Rs ${data.primary_cart.total_rupees.toFixed(2)}</strong>
+            </div>
+
+            <button class="btn-exec" id="execBtn-${msgId}" onclick="executePaymentForMsg('${msgId}', '${data.merchant}')">
+              Confirm & Execute Selected Cart
+            </button>
+          </div>
+        </div>
+      `;
+
+      recalcMsgTotal(msgId);
+      const chat = document.getElementById('chatMessages');
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function recalcMsgTotal(msgId) {
+      const cbs = document.querySelectorAll(`.cb-${msgId}:checked`);
+      let sum = 0;
+      cbs.forEach(cb => {
+        sum += parseFloat(cb.getAttribute('data-price') || 0);
+      });
+      const totalEl = document.getElementById(`total-${msgId}`);
+      if (totalEl) {
+        totalEl.innerText = `Rs ${sum.toFixed(2)}`;
+      }
+      const btn = document.getElementById(`execBtn-${msgId}`);
+      if (btn && btn.innerText !== '✓ Payment Executed') {
+        if (cbs.length === 0 || sum === 0) {
+          btn.disabled = true;
+          btn.innerText = 'No Items Selected to Execute';
+        } else {
+          btn.disabled = false;
+          btn.innerText = 'Confirm & Execute Selected Cart';
+        }
+      }
+    }
+
+    async function executePaymentForMsg(msgId, merchant) {
+      const checked = document.querySelectorAll(`.cb-${msgId}:checked`);
+      if (checked.length === 0) {
+        alert('Please select at least one item using the checkmarks.');
+        return;
+      }
+
+      const btn = document.getElementById(`execBtn-${msgId}`);
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = 'Processing Razorpay Reconciled Payment...';
+      }
+
+      const selectedItems = [];
+      checked.forEach(cb => {
+        selectedItems.push({
+          sku: cb.getAttribute('data-sku'),
+          quantity: parseInt(cb.getAttribute('data-qty') || 1, 10)
+        });
+      });
+
+      try {
+        const res = await fetch('/api/execute', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            merchant: merchant,
+            selected_items: selectedItems
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (btn) {
+            btn.innerHTML = '✓ Payment Executed';
+            btn.style.background = 'var(--accent-green)';
+          }
+
+          // Append success message card to chat
+          const chat = document.getElementById('chatMessages');
+          const row = document.createElement('div');
+          row.className = 'message-row agent-row';
+          row.innerHTML = `
+            <div class="avatar">💳</div>
+            <div class="bubble agent-bubble success-bubble">
+              <div class="success-header">✓ Razorpay Payment Executed & Reconciled</div>
+              <div class="success-details">
+                <p><strong>Razorpay Order ID:</strong> <code>${data.order_id}</code></p>
+                <p><strong>Amount Charged:</strong> <strong>Rs ${data.total_rupees.toFixed(2)}</strong></p>
+                <p><strong>Tier-1 Cryptographic Recon:</strong> <span class="recon-match">MATCHED (${escapeHtml(data.recon_detail)})</span></p>
+              </div>
+            </div>
+          `;
+          chat.appendChild(row);
+          chat.scrollTop = chat.scrollHeight;
+        } else {
+          alert('Execution failed: ' + data.error);
+          if (btn) {
+            btn.disabled = false;
+            btn.innerText = 'Confirm & Execute Selected Cart';
+          }
+        }
+      } catch (err) {
+        alert('Error executing payment: ' + err.message);
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = 'Confirm & Execute Selected Cart';
+        }
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

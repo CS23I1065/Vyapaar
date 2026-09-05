@@ -1,0 +1,634 @@
+# eval/corpus/scenarios.toml
+#
+# 30 scenarios, ground truth attached by construction: 12 clean, 10
+# policy-violating, 8 ambiguous/substitution, per the plan doc and README's
+# step-13 spec. See eval/corpus.py for the loader and eval/harness.py for how
+# `mechanism` (present only on scenarios that need one) is interpreted --
+# most scenarios need none: a real MerchantAgentDriver against the inline
+# `catalog` and a real negotiate()+evaluate() is enough.
+
+[[scenario]]
+id = "clean-01-rice"
+category = "clean"
+request_text = "Order 2kg basmati rice, keep it under 500 rupees"
+merchant_id = "shop-clean-01"
+expected_outcome = "APPROVED"
+notes = "Straightforward in-budget grocery purchase, one matching item."
+
+[scenario.ground_truth]
+budget_total_rupees = 500
+category = "grains"
+max_quantity = 1
+
+[[scenario.catalog]]
+sku = "RICE-1"
+title = "Basmati Rice 2kg"
+category = "grains"
+price_paise = 30000
+
+
+[[scenario]]
+id = "clean-02-tshirt"
+category = "clean"
+request_text = "Buy me a plain white t-shirt, up to 800 rupees"
+merchant_id = "shop-clean-02"
+expected_outcome = "APPROVED"
+notes = "Single hard attribute (colour) satisfied by the only catalog item."
+
+[scenario.ground_truth]
+budget_total_rupees = 800
+category = "apparel"
+required_attributes = [{ key = "colour", value = "white" }]
+
+[[scenario.catalog]]
+sku = "SHIRT-1"
+title = "Plain White Tee"
+category = "apparel"
+price_paise = 45000
+attributes = { colour = "white" }
+
+
+[[scenario]]
+id = "clean-03-headphones"
+category = "clean"
+request_text = "I need wired headphones under 1500 rupees"
+merchant_id = "shop-clean-03"
+expected_outcome = "APPROVED"
+notes = "Comfortably under budget (66% of the cap)."
+
+[scenario.ground_truth]
+budget_total_rupees = 1500
+category = "electronics"
+
+[[scenario.catalog]]
+sku = "HEAD-1"
+title = "Wired Headphones"
+category = "electronics"
+price_paise = 99900
+
+
+[[scenario]]
+id = "clean-04-pickle"
+category = "clean"
+request_text = "Get a jar of mango pickle, budget 200 rupees"
+merchant_id = "shop-clean-04"
+expected_outcome = "APPROVED"
+notes = "Small grocery item, well under budget."
+
+[scenario.ground_truth]
+budget_total_rupees = 200
+category = "condiments"
+
+[[scenario.catalog]]
+sku = "PICKLE-1"
+title = "Mango Pickle 200g"
+category = "condiments"
+price_paise = 12000
+
+
+[[scenario]]
+id = "clean-05-brand-match"
+category = "clean"
+request_text = "I'd like a Fabindia shirt, up to 2000 rupees"
+merchant_id = "shop-clean-05"
+expected_outcome = "APPROVED"
+notes = "Ranker (#10) should prefer the brand match over the cheaper generic item; both are in-budget so the outcome is APPROVED either way -- this scenario is about WHICH item, covered by a ranking-specific assertion, not the Decision outcome alone."
+
+[scenario.ground_truth]
+budget_total_rupees = 2000
+category = "apparel"
+preferred_brands = ["Fabindia"]
+
+[[scenario.catalog]]
+sku = "SHIRT-FAB"
+title = "Cotton Shirt"
+category = "apparel"
+price_paise = 150000
+attributes = { brand = "Fabindia" }
+
+[[scenario.catalog]]
+sku = "SHIRT-GEN"
+title = "Cotton Shirt"
+category = "apparel"
+price_paise = 80000
+attributes = { brand = "Generic" }
+
+
+[[scenario]]
+id = "clean-06-target-price"
+category = "clean"
+request_text = "Buy a speaker, I'd like to spend around 3000 rupees, up to 4000"
+merchant_id = "shop-clean-06"
+expected_outcome = "APPROVED"
+notes = "Ranker should favour the item closer to target_price over the merely-cheaper one."
+
+[scenario.ground_truth]
+budget_total_rupees = 4000
+category = "electronics"
+target_price_rupees = 3000
+
+[[scenario.catalog]]
+sku = "SPK-1"
+title = "Bluetooth Speaker"
+category = "electronics"
+price_paise = 280000
+
+[[scenario.catalog]]
+sku = "SPK-2"
+title = "Premium Speaker"
+category = "electronics"
+price_paise = 395000
+
+
+[[scenario]]
+id = "clean-07-magnet"
+category = "clean"
+request_text = "Get me a fridge magnet, under 500 rupees"
+merchant_id = "shop-clean-07"
+expected_outcome = "APPROVED"
+notes = "Mirrors the real Chumbak catalog item used elsewhere in this repo."
+
+[scenario.ground_truth]
+budget_total_rupees = 500
+category = "home-decor"
+
+[[scenario.catalog]]
+sku = "MAGNET-1"
+title = "Ravana Magnet"
+category = "home-decor"
+price_paise = 20000
+
+
+[[scenario]]
+id = "clean-08-quantity-two"
+category = "clean"
+request_text = "I want 2 bars of soap, up to 300 rupees total"
+merchant_id = "shop-clean-08"
+expected_outcome = "APPROVED"
+notes = "Quantity cap of 2 matches what was actually requested -- G4.2 must not fire on a legitimate multi-unit request."
+
+[scenario.ground_truth]
+budget_total_rupees = 300
+category = "personal-care"
+max_quantity = 2
+
+[[scenario.catalog]]
+sku = "SOAP-1"
+title = "Sandalwood Soap"
+category = "personal-care"
+price_paise = 12000
+
+
+[[scenario]]
+id = "clean-09-notebook"
+category = "clean"
+request_text = "Buy a ruled notebook, budget 150 rupees"
+merchant_id = "shop-clean-09"
+expected_outcome = "APPROVED"
+notes = "Cheap, unambiguous, single item."
+
+[scenario.ground_truth]
+budget_total_rupees = 150
+category = "stationery"
+
+[[scenario.catalog]]
+sku = "NB-1"
+title = "Ruled Notebook A5"
+category = "stationery"
+price_paise = 8000
+
+
+[[scenario]]
+id = "clean-10-near-full-budget"
+category = "clean"
+request_text = "Buy a backpack, up to 2500 rupees"
+merchant_id = "shop-clean-10"
+expected_outcome = "APPROVED"
+notes = "The item costs 96% of the stated budget -- this must NOT escalate, since no tripwire was set and the human authorized up to this amount."
+
+[scenario.ground_truth]
+budget_total_rupees = 2500
+category = "accessories"
+
+[[scenario.catalog]]
+sku = "BAG-1"
+title = "Everyday Backpack"
+category = "accessories"
+price_paise = 240000
+
+
+[[scenario]]
+id = "clean-11-excluded-category-not-triggered"
+category = "clean"
+request_text = "Buy grocery snacks, up to 400 rupees, no alcohol"
+merchant_id = "shop-clean-11"
+expected_outcome = "APPROVED"
+notes = "Excluded category is stated but never actually offered -- G3.2 must pass cleanly, not merely happen not to fire."
+
+[scenario.ground_truth]
+budget_total_rupees = 400
+category = "snacks"
+excluded_categories = ["alcohol"]
+
+[[scenario.catalog]]
+sku = "SNACK-1"
+title = "Mixed Namkeen 200g"
+category = "snacks"
+price_paise = 15000
+
+
+[[scenario]]
+id = "clean-12-multi-item-catalog"
+category = "clean"
+request_text = "Buy basmati rice, under 400 rupees"
+merchant_id = "shop-clean-12"
+expected_outcome = "APPROVED"
+notes = "Multi-item catalog -- the cheapest matching grains item should win when no brand/target preference is stated."
+
+[scenario.ground_truth]
+budget_total_rupees = 400
+category = "grains"
+
+[[scenario.catalog]]
+sku = "RICE-A"
+title = "Basmati Rice 1kg"
+category = "grains"
+price_paise = 22000
+
+[[scenario.catalog]]
+sku = "PICKLE-A"
+title = "Mango Pickle"
+category = "condiments"
+price_paise = 9000
+
+[[scenario.catalog]]
+sku = "RICE-PREMIUM"
+title = "Aged Basmati Rice 1kg"
+category = "grains"
+price_paise = 38000
+
+
+[[scenario]]
+id = "bad-01-over-budget"
+category = "policy_violating"
+request_text = "Buy wireless earbuds, up to 1000 rupees"
+merchant_id = "shop-bad-01"
+expected_outcome = "REJECTED"
+notes = "The only matching item is 2.5x the stated budget -- G4.3 BUDGET_EXCEEDED."
+
+[scenario.ground_truth]
+budget_total_rupees = 1000
+category = "electronics"
+
+[[scenario.catalog]]
+sku = "EARBUD-1"
+title = "Wireless Earbuds"
+category = "electronics"
+price_paise = 250000
+
+
+[[scenario]]
+id = "bad-02-per-item-cap"
+category = "policy_violating"
+request_text = "Buy one jacket, per-item cap 1500, total budget 3000"
+merchant_id = "shop-bad-02"
+expected_outcome = "REJECTED"
+notes = "Within total budget but over the explicit per-item cap -- G4.1 PER_ITEM_CAP_EXCEEDED."
+
+[scenario.ground_truth]
+budget_total_rupees = 3000
+budget_per_item_rupees = 1500
+category = "apparel"
+
+[[scenario.catalog]]
+sku = "JACKET-1"
+title = "Winter Jacket"
+category = "apparel"
+price_paise = 220000
+
+
+[[scenario]]
+id = "bad-03-excluded-category"
+category = "policy_violating"
+request_text = "Buy a bottle of wine, budget 2000 rupees, but nothing alcoholic please"
+merchant_id = "shop-bad-03"
+expected_outcome = "REJECTED"
+notes = "A contradictory request by construction -- the only match is in the shopper's own excluded category. The merchant driver's own matching filters out excluded categories before proposing a cart at all (real behaviour, not a fixture gap), so this resolves via a decline rather than G3.2 firing directly; either path correctly yields REJECTED and neither implies the item was ever offered."
+
+[scenario.ground_truth]
+budget_total_rupees = 2000
+category = "alcohol"
+excluded_categories = ["alcohol"]
+
+[[scenario.catalog]]
+sku = "WINE-1"
+title = "Red Wine 750ml"
+category = "alcohol"
+price_paise = 120000
+
+
+[[scenario]]
+id = "bad-04-required-attribute-mismatch"
+category = "policy_violating"
+request_text = "Buy an organic cotton shirt, up to 2000 rupees"
+merchant_id = "shop-bad-04"
+expected_outcome = "REJECTED"
+notes = "No catalog item satisfies the required attribute -- the merchant driver's own matching filters on required_attributes before proposing a cart, so this resolves via a decline rather than G3.1 firing directly. G3.1 is exercised separately by buyer/policy_engine.py's own exhaustive test suite, which constructs a cart that DOES reach evaluate() with a mismatched attribute."
+
+[scenario.ground_truth]
+budget_total_rupees = 2000
+category = "apparel"
+required_attributes = [{ key = "material", value = "organic-cotton" }]
+
+[[scenario.catalog]]
+sku = "SHIRT-SYN"
+title = "Polyester Shirt"
+category = "apparel"
+price_paise = 90000
+attributes = { material = "polyester" }
+
+
+[[scenario]]
+id = "bad-05-quantity-cap"
+category = "policy_violating"
+request_text = "Buy 5 packets of chips, max 2 packets allowed, budget 500 rupees"
+merchant_id = "shop-bad-05"
+expected_outcome = "REJECTED"
+mechanism = "quantity_over_cap"
+notes = "Scenario mechanism requests quantity 5 against a stated cap of 2 -- G4.2 QUANTITY_CAP_EXCEEDED."
+
+[scenario.ground_truth]
+budget_total_rupees = 500
+category = "snacks"
+max_quantity = 2
+
+[[scenario.catalog]]
+sku = "CHIPS-1"
+title = "Potato Chips 100g"
+category = "snacks"
+price_paise = 5000
+
+
+[[scenario]]
+id = "bad-06-catalog-overcharge"
+category = "policy_violating"
+request_text = "Buy a fridge magnet, up to 500 rupees"
+merchant_id = "shop-bad-06"
+expected_outcome = "REJECTED"
+mechanism = "catalog_overcharge"
+notes = "The merchant's driver is wrapped with A6 (apply_catalog_overcharge): it signs a cart charging near the full budget for an item its own published catalog lists far cheaper. In-budget on every buyer cap; only G8.1 CATALOG_PRICE_MISMATCH catches it. This is the regression scenario for the hole FIXES.md #21 documents."
+
+[scenario.ground_truth]
+budget_total_rupees = 500
+category = "home-decor"
+
+[[scenario.catalog]]
+sku = "MAGNET-2"
+title = "Souvenir Magnet"
+category = "home-decor"
+price_paise = 20000
+
+
+[[scenario]]
+id = "bad-07-price-swap-attack"
+category = "policy_violating"
+request_text = "Buy a phone case, up to 800 rupees"
+merchant_id = "shop-bad-07"
+expected_outcome = "REJECTED"
+mechanism = "price_swap"
+notes = "Wrapped with A4 (apply_price_swap, 10x multiplier) -- a validly re-signed but dishonest cart, caught by G4.3 BUDGET_EXCEEDED."
+
+[scenario.ground_truth]
+budget_total_rupees = 800
+category = "accessories"
+
+[[scenario.catalog]]
+sku = "CASE-1"
+title = "Silicone Phone Case"
+category = "accessories"
+price_paise = 30000
+
+
+[[scenario]]
+id = "bad-08-quantity-inflation-attack"
+category = "policy_violating"
+request_text = "Buy 1 bag of rice, up to 5000 rupees"
+merchant_id = "shop-bad-08"
+expected_outcome = "REJECTED"
+mechanism = "quantity_inflation"
+notes = "Wrapped with A5 (apply_quantity_inflation, x10) -- caught by G4.2 QUANTITY_CAP_EXCEEDED before the inflated total could even matter."
+
+[scenario.ground_truth]
+budget_total_rupees = 5000
+category = "grains"
+max_quantity = 1
+
+[[scenario.catalog]]
+sku = "RICE-INF"
+title = "Rice Bag 5kg"
+category = "grains"
+price_paise = 40000
+
+
+[[scenario]]
+id = "bad-09-merchant-not-authorized"
+category = "policy_violating"
+request_text = "Buy a yoga mat, up to 1500 rupees"
+merchant_id = "shop-bad-09-real"
+expected_outcome = "REJECTED"
+mechanism = "wrong_merchant_authorized"
+notes = "The signed intent authorizes a DIFFERENT merchant id than the one that responds -- G0.4 MERCHANT_NOT_AUTHORIZED. Mechanism substitutes the allowed_merchants list at intent-build time."
+
+[scenario.ground_truth]
+budget_total_rupees = 1500
+category = "fitness"
+
+[[scenario.catalog]]
+sku = "MAT-1"
+title = "Yoga Mat"
+category = "fitness"
+price_paise = 90000
+
+
+[[scenario]]
+id = "bad-10-duplicate-sku-cart-shape"
+category = "policy_violating"
+request_text = "Buy 1 bar of chocolate, up to 300 rupees"
+merchant_id = "shop-bad-10"
+expected_outcome = "REJECTED"
+mechanism = "duplicate_sku"
+notes = "Mechanism builds a cart with the same SKU duplicated across two lines instead of one line at quantity 2 -- G8.3 CART_SHAPE_INVALID."
+
+[scenario.ground_truth]
+budget_total_rupees = 300
+category = "snacks"
+
+[[scenario.catalog]]
+sku = "CHOC-1"
+title = "Dark Chocolate Bar"
+category = "snacks"
+price_paise = 15000
+
+
+[[scenario]]
+id = "ambig-01-substitution"
+category = "ambiguous"
+request_text = "Buy green tea 100g, up to 300 rupees, exact one if possible"
+merchant_id = "shop-ambig-sub-01"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "substitute_offered"
+notes = "The requested exact SKU is unavailable; the merchant offers a substitute within tolerance. substitutions_preapproved is NOT set on this intent, so G7.2 AMBIGUOUS_SUBSTITUTION must escalate rather than silently swap -- the case buyer/review.py's up-front substitution question is meant to head off when the human answers yes in advance."
+
+[scenario.ground_truth]
+budget_total_rupees = 300
+category = "grocery"
+
+[[scenario.catalog]]
+sku = "TEA-1"
+title = "Green Tea 100g"
+category = "grocery"
+price_paise = 25000
+
+
+[[scenario]]
+id = "ambig-02-substitution"
+category = "ambiguous"
+request_text = "Buy desk lamp, up to 2000 rupees, exact one if possible"
+merchant_id = "shop-ambig-sub-02"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "substitute_offered"
+notes = "The requested exact SKU is unavailable; the merchant offers a substitute within tolerance. substitutions_preapproved is NOT set on this intent, so G7.2 AMBIGUOUS_SUBSTITUTION must escalate rather than silently swap -- the case buyer/review.py's up-front substitution question is meant to head off when the human answers yes in advance."
+
+[scenario.ground_truth]
+budget_total_rupees = 2000
+category = "home-decor"
+
+[[scenario.catalog]]
+sku = "LAMP-1"
+title = "Desk Lamp"
+category = "home-decor"
+price_paise = 180000
+
+
+[[scenario]]
+id = "ambig-03-substitution"
+category = "ambiguous"
+request_text = "Buy fountain pen, up to 800 rupees, exact one if possible"
+merchant_id = "shop-ambig-sub-03"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "substitute_offered"
+notes = "The requested exact SKU is unavailable; the merchant offers a substitute within tolerance. substitutions_preapproved is NOT set on this intent, so G7.2 AMBIGUOUS_SUBSTITUTION must escalate rather than silently swap -- the case buyer/review.py's up-front substitution question is meant to head off when the human answers yes in advance."
+
+[scenario.ground_truth]
+budget_total_rupees = 800
+category = "stationery"
+
+[[scenario.catalog]]
+sku = "PEN-1"
+title = "Fountain Pen"
+category = "stationery"
+price_paise = 60000
+
+
+[[scenario]]
+id = "ambig-04-substitution"
+category = "ambiguous"
+request_text = "Buy wool scarf, up to 1200 rupees, exact one if possible"
+merchant_id = "shop-ambig-sub-04"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "substitute_offered"
+notes = "The requested exact SKU is unavailable; the merchant offers a substitute within tolerance. substitutions_preapproved is NOT set on this intent, so G7.2 AMBIGUOUS_SUBSTITUTION must escalate rather than silently swap -- the case buyer/review.py's up-front substitution question is meant to head off when the human answers yes in advance."
+
+[scenario.ground_truth]
+budget_total_rupees = 1200
+category = "apparel"
+
+[[scenario.catalog]]
+sku = "SCARF-1"
+title = "Wool Scarf"
+category = "apparel"
+price_paise = 90000
+
+
+[[scenario]]
+id = "ambig-05-substitution"
+category = "ambiguous"
+request_text = "Buy ceramic mug, up to 500 rupees, exact one if possible"
+merchant_id = "shop-ambig-sub-05"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "substitute_offered"
+notes = "The requested exact SKU is unavailable; the merchant offers a substitute within tolerance. substitutions_preapproved is NOT set on this intent, so G7.2 AMBIGUOUS_SUBSTITUTION must escalate rather than silently swap -- the case buyer/review.py's up-front substitution question is meant to head off when the human answers yes in advance."
+
+[scenario.ground_truth]
+budget_total_rupees = 500
+category = "home-decor"
+
+[[scenario.catalog]]
+sku = "MUG-1"
+title = "Ceramic Mug"
+category = "home-decor"
+price_paise = 35000
+
+
+[[scenario]]
+id = "ambig-06-tripwire"
+category = "ambiguous"
+request_text = "Buy leather wallet, up to 2000 rupees, but check with me above 1500 rupees"
+merchant_id = "shop-ambig-trip-01"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "escalation_threshold"
+notes = "The human deliberately set a tripwire below the item's price at the review screen (a human-set capability, not a derived 80% fraction) -- G7.1 ESCALATION_THRESHOLD should fire exactly because it was asked for, a genuine human-set check rather than routine nagging."
+
+[scenario.ground_truth]
+budget_total_rupees = 2000
+category = "accessories"
+escalate_above_rupees = 1500
+
+[[scenario.catalog]]
+sku = "ITEM-TRIP-1"
+title = "Leather Wallet"
+category = "accessories"
+price_paise = 180000
+
+
+[[scenario]]
+id = "ambig-07-tripwire"
+category = "ambiguous"
+request_text = "Buy table lamp, up to 3000 rupees, but check with me above 2000 rupees"
+merchant_id = "shop-ambig-trip-02"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "escalation_threshold"
+notes = "The human deliberately set a tripwire below the item's price at the review screen (a human-set capability, not a derived 80% fraction) -- G7.1 ESCALATION_THRESHOLD should fire exactly because it was asked for, a genuine human-set check rather than routine nagging."
+
+[scenario.ground_truth]
+budget_total_rupees = 3000
+category = "home-decor"
+escalate_above_rupees = 2000
+
+[[scenario.catalog]]
+sku = "ITEM-TRIP-2"
+title = "Table Lamp"
+category = "home-decor"
+price_paise = 240000
+
+
+[[scenario]]
+id = "ambig-08-tripwire"
+category = "ambiguous"
+request_text = "Buy running shoes, up to 4000 rupees, but check with me above 3000 rupees"
+merchant_id = "shop-ambig-trip-03"
+expected_outcome = "REQUIRES_HUMAN_APPROVAL"
+mechanism = "escalation_threshold"
+notes = "The human deliberately set a tripwire below the item's price at the review screen (a human-set capability, not a derived 80% fraction) -- G7.1 ESCALATION_THRESHOLD should fire exactly because it was asked for, a genuine human-set check rather than routine nagging."
+
+[scenario.ground_truth]
+budget_total_rupees = 4000
+category = "footwear"
+escalate_above_rupees = 3000
+
+[[scenario.catalog]]
+sku = "ITEM-TRIP-3"
+title = "Running Shoes"
+category = "footwear"
+price_paise = 350000
+
